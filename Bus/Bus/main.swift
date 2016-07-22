@@ -13,8 +13,8 @@ import Foundation
   
 }
 
-class MyNotif : Notifier {
-  enum Notification : String, NotificationType {
+class MyNotif : Bus {
+  enum EventBus : String, EventBusType {
     case coffeeMade
   
     var notification:Selector {
@@ -35,7 +35,13 @@ class Test :NSObject, TestEventBus {
 let t = Test()
 
 //register
+//MyNotif.register(t, event: .coffeMade)
 MyNotif.register(t, event: .coffeeMade)
 
+//post event
 MyNotif.post(.coffeeMade, object: "bonjour")
+
+//unregister
+//MyNotif.unregister(t)
+MyNotif.unregister(t, event: .coffeeMade)
 
