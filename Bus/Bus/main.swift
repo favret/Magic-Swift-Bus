@@ -8,35 +8,34 @@
 
 import Foundation
 
-print("Hello, World!")
-
-@objc protocol TestEventBus: Event {
+@objc protocol TestEventBus {
+  func test(str:String)
   
-  func test(notification:String)
 }
 
+class MyNotif : Notifier {
+  enum Notification : String, NotificationType {
+    case coffeeMade
+  
+    var notification:Selector {
+      switch self {
+      case .coffeeMade: return #selector(TestEventBus.test(_:))
+      }
+    }
+  }  
+}
 
 class Test :NSObject, TestEventBus {
   
-  @objc func getNotifications() -> [String] {
-    return [
-      (#selector(TestEventBus.test(_:))).description
-    ]
-  }
-  
-  @objc func test(notification:String) {
-    print(notification)
+  @objc func test(str:String) {
+    print(str)
   }
 }
 
 let t = Test()
 
-Bus.register(t)
+//register
+MyNotif.register(t, event: .coffeeMade)
 
-
-NSNotificationCenter.defaultCenter()
-  .postNotificationName(
-    (#selector(TestEventBus.test(_:))).description,
-    object: "bonjour",
-    userInfo: nil)
+MyNotif.post(.coffeeMade, object: "bonjour")
 
