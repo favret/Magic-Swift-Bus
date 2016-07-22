@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CAF304E11D3E1F9D003C2E70 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF304E01D3E1F9D003C2E70 /* main.swift */; };
-		CAF304E81D3E1FBD003C2E70 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF304E71D3E1FBD003C2E70 /* Bus.swift */; };
 		CAF304EA1D3E63F9003C2E70 /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF304E91D3E63F9003C2E70 /* Notifier.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +26,6 @@
 /* Begin PBXFileReference section */
 		CAF304DD1D3E1F9D003C2E70 /* Bus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Bus; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF304E01D3E1F9D003C2E70 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		CAF304E71D3E1FBD003C2E70 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 		CAF304E91D3E63F9003C2E70 /* Notifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +59,6 @@
 		CAF304DF1D3E1F9D003C2E70 /* Bus */ = {
 			isa = PBXGroup;
 			children = (
-				CAF304E71D3E1FBD003C2E70 /* Bus.swift */,
 				CAF304E01D3E1F9D003C2E70 /* main.swift */,
 				CAF304E91D3E63F9003C2E70 /* Notifier.swift */,
 			);
@@ -125,7 +122,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAF304E81D3E1FBD003C2E70 /* Bus.swift in Sources */,
 				CAF304EA1D3E63F9003C2E70 /* Notifier.swift in Sources */,
 				CAF304E11D3E1F9D003C2E70 /* main.swift in Sources */,
 			);
@@ -249,6 +245,7 @@
 				CAF304E61D3E1F9D003C2E70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
