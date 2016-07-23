@@ -8,40 +8,36 @@
 
 import Foundation
 
-@objc protocol TestEventBus {
-  func test(str:String)
+@objc protocol MyEvent {
   
+  func test(str:String)
 }
 
-class MyNotif : Bus {
-  enum EventBus : String, EventBusType {
-    case coffeeMade
-  
-    var notification:Selector {
+class MyBus: Bus {
+  enum EventBus: String, EventBusType{
+    case Test
+    
+    var notification: Selector {
       switch self {
-      case .coffeeMade: return #selector(TestEventBus.test(_:))
+      case .Test: return #selector(MyEvent.test(_:))
       }
     }
-  }  
+  }
 }
 
-class Test :NSObject, TestEventBus {
+class Test :NSObject, MyEvent {
   
-  @objc func test(str:String) {
+  func test(str: String) {
     print(str)
   }
+
 }
 
 let t = Test()
 
-//register
-//MyNotif.register(t, event: .coffeMade)
-MyNotif.register(t, event: .coffeeMade)
+MyBus.register(t, event: .Test)
 
-//post event
-MyNotif.post(.coffeeMade, object: "bonjour")
+MyBus.post(.Test, object: "bonjour")
 
-//unregister
-//MyNotif.unregister(t)
-MyNotif.unregister(t, event: .coffeeMade)
+MyBus.unregister(t, event: .Test)
 
