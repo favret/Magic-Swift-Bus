@@ -17,18 +17,18 @@ Use NotificationCenter with EventBus style
 You can find an exemple in `main.swift`
 
 ## Installation
-1. Download `Bus.Swift`
+- Download `Bus.Swift`
 
 ## Exemple
 
-1. Create your protocol
+- Create your protocol
 ```
 @objc protocol MyEvent {
   func testSuccess(str:String)
 }
 ```
 
-2. create a class who inherit `Bus`
+- create a class who inherit `Bus`
 You also have to map your event with the associated method
 ```
 class MyBus: Bus {
@@ -43,7 +43,7 @@ class MyBus: Bus {
   }
 }
 ```
-3. In your receiver, can be ViewController, nsobject or something else, implement all methods that you want to receive 
+- In your receiver, can be ViewController, nsobject or something else, implement all methods that you want to receive 
 ```
 extension MyReceiver: MyEvent {
   
