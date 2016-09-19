@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CACD00961D9024EC004947A2 /* Bus.h in Headers */ = {isa = PBXBuildFile; fileRef = CACD00941D9024EC004947A2 /* Bus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CACD009A1D9024F0004947A2 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF304E91D3E63F9003C2E70 /* Bus.swift */; };
 		CAF304E11D3E1F9D003C2E70 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF304E01D3E1F9D003C2E70 /* main.swift */; };
 		CAF304EA1D3E63F9003C2E70 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF304E91D3E63F9003C2E70 /* Bus.swift */; };
 /* End PBXBuildFile section */
@@ -24,12 +26,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CAF304DD1D3E1F9D003C2E70 /* Bus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Bus; sourceTree = BUILT_PRODUCTS_DIR; };
+		CACD00921D9024EC004947A2 /* Bus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CACD00941D9024EC004947A2 /* Bus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bus.h; sourceTree = "<group>"; };
+		CACD00951D9024EC004947A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAF304DD1D3E1F9D003C2E70 /* BusTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BusTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF304E01D3E1F9D003C2E70 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CAF304E91D3E63F9003C2E70 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CACD008E1D9024EC004947A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAF304DA1D3E1F9D003C2E70 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,10 +52,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CACD00931D9024EC004947A2 /* Bus */ = {
+			isa = PBXGroup;
+			children = (
+				CACD00941D9024EC004947A2 /* Bus.h */,
+				CACD00951D9024EC004947A2 /* Info.plist */,
+			);
+			path = Bus;
+			sourceTree = "<group>";
+		};
 		CAF304D41D3E1F9D003C2E70 = {
 			isa = PBXGroup;
 			children = (
 				CAF304DF1D3E1F9D003C2E70 /* Bus */,
+				CACD00931D9024EC004947A2 /* Bus */,
 				CAF304DE1D3E1F9D003C2E70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,7 +73,8 @@
 		CAF304DE1D3E1F9D003C2E70 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CAF304DD1D3E1F9D003C2E70 /* Bus */,
+				CAF304DD1D3E1F9D003C2E70 /* BusTest */,
+				CACD00921D9024EC004947A2 /* Bus.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,10 +90,39 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		CACD008F1D9024EC004947A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CACD00961D9024EC004947A2 /* Bus.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		CAF304DC1D3E1F9D003C2E70 /* Bus */ = {
+		CACD00911D9024EC004947A2 /* Bus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CAF304E41D3E1F9D003C2E70 /* Build configuration list for PBXNativeTarget "Bus" */;
+			buildConfigurationList = CACD00971D9024EC004947A2 /* Build configuration list for PBXNativeTarget "Bus" */;
+			buildPhases = (
+				CACD008D1D9024EC004947A2 /* Sources */,
+				CACD008E1D9024EC004947A2 /* Frameworks */,
+				CACD008F1D9024EC004947A2 /* Headers */,
+				CACD00901D9024EC004947A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bus;
+			productName = Bus;
+			productReference = CACD00921D9024EC004947A2 /* Bus.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CAF304DC1D3E1F9D003C2E70 /* BusTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAF304E41D3E1F9D003C2E70 /* Build configuration list for PBXNativeTarget "BusTest" */;
 			buildPhases = (
 				CAF304D91D3E1F9D003C2E70 /* Sources */,
 				CAF304DA1D3E1F9D003C2E70 /* Frameworks */,
@@ -80,9 +132,9 @@
 			);
 			dependencies = (
 			);
-			name = Bus;
+			name = BusTest;
 			productName = Bus;
-			productReference = CAF304DD1D3E1F9D003C2E70 /* Bus */;
+			productReference = CAF304DD1D3E1F9D003C2E70 /* BusTest */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -95,6 +147,10 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = favre;
 				TargetAttributes = {
+					CACD00911D9024EC004947A2 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
 					CAF304DC1D3E1F9D003C2E70 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
@@ -113,12 +169,31 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CAF304DC1D3E1F9D003C2E70 /* Bus */,
+				CAF304DC1D3E1F9D003C2E70 /* BusTest */,
+				CACD00911D9024EC004947A2 /* Bus */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		CACD00901D9024EC004947A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		CACD008D1D9024EC004947A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CACD009A1D9024F0004947A2 /* Bus.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAF304D91D3E1F9D003C2E70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -131,6 +206,65 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		CACD00981D9024EC004947A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Bus/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = favre.Bus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CACD00991D9024EC004947A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Bus/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = favre.Bus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		CAF304E21D3E1F9D003C2E70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -232,6 +366,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CACD00971D9024EC004947A2 /* Build configuration list for PBXNativeTarget "Bus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CACD00981D9024EC004947A2 /* Debug */,
+				CACD00991D9024EC004947A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CAF304D81D3E1F9D003C2E70 /* Build configuration list for PBXProject "Bus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -241,7 +383,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CAF304E41D3E1F9D003C2E70 /* Build configuration list for PBXNativeTarget "Bus" */ = {
+		CAF304E41D3E1F9D003C2E70 /* Build configuration list for PBXNativeTarget "BusTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CAF304E51D3E1F9D003C2E70 /* Debug */,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CAF304DC1D3E1F9D003C2E70"
-               BuildableName = "BusTest"
-               BlueprintName = "BusTest"
+               BlueprintIdentifier = "CACD00911D9024EC004947A2"
+               BuildableName = "Bus.framework"
+               BlueprintName = "Bus"
                ReferencedContainer = "container:Bus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CAF304DC1D3E1F9D003C2E70"
-            BuildableName = "BusTest"
-            BlueprintName = "BusTest"
-            ReferencedContainer = "container:Bus.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CAF304DC1D3E1F9D003C2E70"
-            BuildableName = "BusTest"
-            BlueprintName = "BusTest"
+            BlueprintIdentifier = "CACD00911D9024EC004947A2"
+            BuildableName = "Bus.framework"
+            BlueprintName = "Bus"
             ReferencedContainer = "container:Bus.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CAF304DC1D3E1F9D003C2E70"
-            BuildableName = "BusTest"
-            BlueprintName = "BusTest"
+            BlueprintIdentifier = "CACD00911D9024EC004947A2"
+            BuildableName = "Bus.framework"
+            BlueprintName = "Bus"
             ReferencedContainer = "container:Bus.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
