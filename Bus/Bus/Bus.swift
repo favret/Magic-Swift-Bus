@@ -39,6 +39,31 @@ public extension Bus where EventBus.RawValue == String {
       .post(name: Notification.Name(rawValue: name), object: object, userInfo: userInfo)
   }
   
+  
+  // MARK: Post on Thread
+  
+  static func postOnMainThread(event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil, async:Bool = true) {
+   Self.postOn(queue: DispatchQueue.main, event: event, object: object, userInfo: userInfo, async: async)
+  }
+  
+  static func postOnBackgroundThread(event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil, async:Bool = true) {
+    Self.postOn(queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default), event: event, object: object, userInfo: userInfo, async: async)
+  }
+  
+  static func postOn(queue:DispatchQueue, event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil, async:Bool = true) {
+    if async {
+      queue.async {
+        Self.post(event, object: object, userInfo: userInfo)
+      }
+    }
+    else {
+      queue.sync {
+        Self.post(event, object: object, userInfo: userInfo)
+      }
+    }
+
+  }
+  
   // MARK: Register
   static func register(_ observer: AnyObject, events: EventBus ...,
     queue: OperationQueue = OperationQueue.main) {

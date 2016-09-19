@@ -37,7 +37,7 @@ let t = Test()
 
 MyBus.register(t, event: .Test)
 
-MyBus.post(.Test, object: "bonjour")
+MyBus.post(.Test, object: "bonjour" as AnyObject?)
 
 MyBus.unregister(t, event: .Test)
 
