@@ -10,7 +10,7 @@ import Foundation
 
 @objc protocol MyEvent {
   
-  func test(str:String)
+  func test(_ str:String)
 }
 
 class MyBus: Bus {
@@ -27,7 +27,7 @@ class MyBus: Bus {
 
 class Test :NSObject, MyEvent {
   
-  func test(str: String) {
+  func test(_ str: String) {
     print(str)
   }
 

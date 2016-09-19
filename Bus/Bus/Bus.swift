@@ -18,72 +18,72 @@ public protocol Bus {
 
 public extension Bus where EventBus.RawValue == String {
   
-  private static func nameFor(event: EventBus) -> String {
+  fileprivate static func nameFor(_ event: EventBus) -> String {
     return "\(self).\(event.rawValue)"
   }
 
   // MARK: Post
   
-  func post(event: EventBus, object: AnyObject? = nil) {
+  func post(_ event: EventBus, object: AnyObject? = nil) {
     Self.post(event, object: object)
   }
   
-  func post(event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil) {
+  func post(_ event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil) {
     Self.post(event, object: object, userInfo: userInfo)
   }
   
-  static func post(event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil) {
+  static func post(_ event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil) {
     let name = nameFor(event)
     
-    NSNotificationCenter.defaultCenter()
-      .postNotificationName(name, object: object, userInfo: userInfo)
+    NotificationCenter.default
+      .post(name: Notification.Name(rawValue: name), object: object, userInfo: userInfo)
   }
   
   // MARK: Register
-  static func register(observer: AnyObject, events: EventBus ...,
-    queue: NSOperationQueue = NSOperationQueue.mainQueue()) {
+  static func register(_ observer: AnyObject, events: EventBus ...,
+    queue: OperationQueue = OperationQueue.main) {
     for event in events {
       register(observer, event: event, queue: queue)
     }
   }
   
-  static func register(observer: AnyObject, event: EventBus,
-                       queue: NSOperationQueue = NSOperationQueue.mainQueue()) {
+  static func register(_ observer: AnyObject, event: EventBus,
+                       queue: OperationQueue = OperationQueue.main) {
     let name = nameFor(event)
     
-    NSNotificationCenter.defaultCenter()
-      .addObserverForName(
-        name,
+    NotificationCenter.default
+      .addObserver(
+        forName: NSNotification.Name(rawValue: name),
         object: nil,
         queue: queue,
-        usingBlock: { [weak observer](notification) in
+        using: { [weak observer](notification) in
           guard let obj = observer as? NSObject
             else { return }
           
           let selector = event.notification
           
           if let o = notification.object {
-            obj.performSelector(selector, withObject: o)
+            obj.perform(selector, with: o)
           }
-          else { obj.performSelector(selector) }
+          else { obj.perform(selector) }
         })
   }
   
   // MARK: Unregister
-  static func unregisterAll(observer: AnyObject) {
-    NSNotificationCenter.defaultCenter().removeObserver(observer)
+  static func unregisterAll(_ observer: AnyObject) {
+    NotificationCenter.default.removeObserver(observer)
   }
   
-  static func unregister(observer: AnyObject, events: EventBus ...) {
+  static func unregister(_ observer: AnyObject, events: EventBus ...) {
     for event in events {
       unregister(observer, event: event)
     }
   }
   
-  static func unregister(observer: AnyObject, event: EventBus, object: AnyObject? = nil) {
+  static func unregister(_ observer: AnyObject, event: EventBus, object: AnyObject? = nil) {
     let name = nameFor(event)
     
-    NSNotificationCenter.defaultCenter()
-      .removeObserver(observer, name: name, object: object)
+    NotificationCenter.default
+      .removeObserver(observer, name: NSNotification.Name(rawValue: name), object: object)
   }
 }
