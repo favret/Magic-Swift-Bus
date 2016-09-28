@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/favret/Magic-Swift-Bus.git", :tag => s.version }
 
   s.module_name = 'MagicSwiftBus'
-  s.source_files  = "MagicSwiftBus/Bus.swift"
+  s.source_files  = "Bus.swift"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
