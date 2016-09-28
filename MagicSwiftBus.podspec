@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = "Bus"
+  s.name         = "MagicSwiftBus"
   s.version      = "0.0.1"
   s.summary      = "Use NotificationCenter with EventBus style"
 
@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/favret/Bus", :tag => s.version }
 
-  s.module_name = 'Bus'
-  s.source_files  = "Bus/Classes/Bus.swift"
+  s.module_name = 'MagicSwiftBus'
+  s.source_files  = "MagicSwiftBus/Classes/Bus.swift"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

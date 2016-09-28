@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Bus.xcodeproj">
+      location = "self:MagicSwiftBus.xcodeproj">
    </FileRef>
 </Workspace>

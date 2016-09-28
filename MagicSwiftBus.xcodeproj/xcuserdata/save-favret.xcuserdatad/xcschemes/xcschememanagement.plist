@@ -4,25 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Bus.xcscheme</key>
+		<key>MagicSwiftBus.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CACD00911D9024EC004947A2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CACD009E1D90352E004947A2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CAF304DC1D3E1F9D003C2E70</key>
+		<key>CA3404E81D9C18D400396729</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CACD00911D9024EC004947A2"
-               BuildableName = "Bus.framework"
-               BlueprintName = "Bus"
-               ReferencedContainer = "container:Bus.xcodeproj">
+               BlueprintIdentifier = "CA3404E81D9C18D400396729"
+               BuildableName = "MagicSwiftBus.framework"
+               BlueprintName = "MagicSwiftBus"
+               ReferencedContainer = "container:MagicSwiftBus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CACD00911D9024EC004947A2"
-            BuildableName = "Bus.framework"
-            BlueprintName = "Bus"
-            ReferencedContainer = "container:Bus.xcodeproj">
+            BlueprintIdentifier = "CA3404E81D9C18D400396729"
+            BuildableName = "MagicSwiftBus.framework"
+            BlueprintName = "MagicSwiftBus"
+            ReferencedContainer = "container:MagicSwiftBus.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CACD00911D9024EC004947A2"
-            BuildableName = "Bus.framework"
-            BlueprintName = "Bus"
-            ReferencedContainer = "container:Bus.xcodeproj">
+            BlueprintIdentifier = "CA3404E81D9C18D400396729"
+            BuildableName = "MagicSwiftBus.framework"
+            BlueprintName = "MagicSwiftBus"
+            ReferencedContainer = "container:MagicSwiftBus.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
