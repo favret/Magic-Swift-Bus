@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		CA3404EE1D9C18D400396729 /* MagicSwiftBus.h in Headers */ = {isa = PBXBuildFile; fileRef = CA3404EC1D9C18D400396729 /* MagicSwiftBus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CA3404F61D9C190F00396729 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3404F51D9C190F00396729 /* Bus.swift */; };
+		CA3404F81D9C25EF00396729 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3404F71D9C25EF00396729 /* Bus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CA3404E91D9C18D400396729 /* MagicSwiftBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicSwiftBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3404EC1D9C18D400396729 /* MagicSwiftBus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicSwiftBus.h; sourceTree = "<group>"; };
 		CA3404ED1D9C18D400396729 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CA3404F51D9C190F00396729 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = Classes/Bus.swift; sourceTree = "<group>"; };
+		CA3404F71D9C25EF00396729 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,19 +48,11 @@
 		CA3404EB1D9C18D400396729 /* MagicSwiftBus */ = {
 			isa = PBXGroup;
 			children = (
-				CA3404F41D9C18FE00396729 /* Classes */,
+				CA3404F71D9C25EF00396729 /* Bus.swift */,
 				CA3404EC1D9C18D400396729 /* MagicSwiftBus.h */,
 				CA3404ED1D9C18D400396729 /* Info.plist */,
 			);
 			path = MagicSwiftBus;
-			sourceTree = "<group>";
-		};
-		CA3404F41D9C18FE00396729 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				CA3404F51D9C190F00396729 /* Bus.swift */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA3404F61D9C190F00396729 /* Bus.swift in Sources */,
+				CA3404F81D9C25EF00396729 /* Bus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +299,7 @@
 				CA3404F31D9C18D400396729 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

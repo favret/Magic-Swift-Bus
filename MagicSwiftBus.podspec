@@ -26,10 +26,10 @@ Pod::Spec.new do |s|
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
 
-  s.source       = { :git => "https://github.com/favret/Bus", :tag => s.version }
+  s.source       = { :git => "https://github.com/favret/Magic-Swift-Bus.git", :tag => s.version }
 
   s.module_name = 'MagicSwiftBus'
-  s.source_files  = "MagicSwiftBus/Classes/Bus.swift"
+  s.source_files  = "MagicSwiftBus/Bus.swift"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
