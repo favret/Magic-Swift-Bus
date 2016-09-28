@@ -1,0 +1,10 @@
+framework module MagicSwiftBus {
+  umbrella header "MagicSwiftBus.h"
+
+  export *
+  module * { export * }
+}
+
+module MagicSwiftBus.Swift {
+    header "MagicSwiftBus-Swift.h"
+}
