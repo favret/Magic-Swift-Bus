@@ -17,52 +17,16 @@ Use NotificationCenter with EventBus style
 You can find an exemple in `main.swift`
 
 ## Installation
-- Download `Bus.Swift`
+1. Download `Bus.Swift`
 
 ## Exemple
 
-- Create your protocol
-```
-@objc protocol MyEvent {
-  func testSuccess(str:String)
-}
-```
+![Bus Demo](./Bus-presentation.gif)
 
-- create a class who inherit `Bus`
-You also have to map your event with the associated method
-```
-class MyBus: Bus {
-  enum EventBus: String, EventBusType{
-    case Test
-    
-    var notification: Selector {
-      switch self {
-      case .Test: return #selector(MyEvent.testSuccess(_:))
-      }
-    }
-  }
-}
-```
-- In your receiver, can be ViewController, nsobject or something else, implement all methods that you want to receive 
-```
-extension MyReceiver: MyEvent {
-  
-  func testSuccess(str: String) {
-    print(str)
-  }
+## Some methods
 
-}
-```
+`func register(observer: AnyObject, event: EventBus ..., queue: NSOperationQueue = NSOperationQueue.mainQueue()) `
 
-Finally, you can fire an event like that :
-```
-MyBus.post(.Test, object: "bonjour")
-```
+`func post(event: EventBus, object: AnyObject? = nil)`
 
-Don't forget to register and unregister your class : 
-```
-MyBus.register(self, event: .Test)
-...
-MyBus.unregisterAll(self)
-```
-
+`func unregister(observer: AnyObject, events: EventBus ...)`
