@@ -13,7 +13,7 @@ Use NotificationCenter with EventBus style
 
 #### register / unregister
 
-```
+```swift
 NSNotificationCenter.defaultCenter().addObserver(
     self,
     selector: #selector(testSuccess(_:)),
@@ -23,13 +23,13 @@ NSNotificationCenter.defaultCenter().addObserver(
 
 #### post notification
 
-```
+```swift
 NSNotificationCenter.defaultCenter().postNotificationName("MyNotificationTest", object: "bonjour" as AnyObject)
 ```
 
 #### implement notification's method
 
-```
+```swift
 func testSuccess(notification: Notification) {
   if let object = notification.object as String {
   }
@@ -40,19 +40,19 @@ func testSuccess(notification: Notification) {
 
 #### register / unregister
 
-```
+```swift
 Bus.register(self, event: .Test, "bonjour")
 ```
 
 #### post notification
 
-```
+```swift
 Bus.post(.Test)
 ```
 
 #### implement notification's method
 
-```
+```swift
 func testSuccess(str: String) {
   print(str)
 }
@@ -70,7 +70,7 @@ $ gem install cocoapods
 
 To integrate MagicSwiftBus into your Xcode project using CocoaPods, it in your `Podfile`:
 
-```
+```ruby
 platform :ios, '9.0'
 use_frameworks!
 
@@ -112,7 +112,7 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 
 ### Create your event protocol
 
-```
+```swift
 @objc protocol MyEvent {
   func testSuccess(str:String)
 }
@@ -122,7 +122,7 @@ Here, you can see that the parameter is a `String` but i can be something else.
 
 ### Implement your event protocol
 
-```
+```swift
 extension MyReceiver: MyEvent {
 
   func testSuccess(str: String) {
@@ -136,7 +136,7 @@ In this exemple, `MyReceiver` can be `UIViewController` or `NSObject` or watheve
 
 ### Add your event protocol to MagicSwiftBus
 
-```
+```swift
 class MyBus: Bus {
   enum EventBus: String, EventBusType{
     case Test
@@ -154,7 +154,7 @@ Then, implement `EventBusType` protocol. in the above exemple, this protocol is 
 
 ### Don't forget to register and unregister
 
-```
+```swift
 MyBus.register(self, event: .Test)
 ...
 MyBus.unregisterAll(self)
@@ -163,7 +163,8 @@ MyBus.unregisterAll(self)
 ### Fire simple notification
 
 Finally, you can fire an event like that :
-```
+
+```swift
 MyBus.post(.Test, object: "bonjour")
 ```
 
@@ -171,19 +172,19 @@ MyBus.post(.Test, object: "bonjour")
 
 #### post event on main Thread
 
-```
+```swift
 MyBus.postOnMainThread(event: .Test)
 ```
 
 #### post event on background Thread
 
-```
+```swift
 MyBus.postOnBackgroundThread(event: .Test)
 ```
 
 #### post event on specific Queue
 
-```
+```swift
 let queue = DispatchQueue("MyQueue")
 ...
 MyBus.postOn(queue: queue, event: .Test)
@@ -191,7 +192,7 @@ MyBus.postOn(queue: queue, event: .Test)
 
 ## Exemple
 
-```
+```swift
 import UIKit
 import MagicSwiftBus
 
