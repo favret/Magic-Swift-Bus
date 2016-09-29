@@ -23,6 +23,9 @@ public extension Bus where EventBus.RawValue == String {
   }
 
   // MARK: Post
+  func post(_ event: EventBus, _ string: String) {
+    Self.post(event, object: string as AnyObject)
+  }
   
   func post(_ event: EventBus, object: AnyObject? = nil) {
     Self.post(event, object: object)
