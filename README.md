@@ -167,6 +167,28 @@ Finally, you can fire an event like that :
 MyBus.post(.Test, object: "bonjour")
 ```
 
+### Thread
+
+#### post event on main Thread
+
+```
+MyBus.postOnMainThread(event: .Test)
+```
+
+#### post event on background Thread
+
+```
+MyBus.postOnBackgroundThread(event: .Test)
+```
+
+#### post event on specific Queue
+
+```
+let queue = DispatchQueue("MyQueue")
+...
+MyBus.postOn(queue: queue, event: .Test)
+```
+
 ## Exemple
 
 ```
@@ -177,16 +199,18 @@ import MagicSwiftBus
 //Define your event protocol
 @objc protocol MyEvent {
   func testSuccess(str:String)
+  func makeCoffee()
 }
 
 //Map protocol to eventBusType
 class MyBus: Bus {
   enum EventBus: String, EventBusType {
-    case Test
+    case Test, MakeCoffe
     
     var notification: Selector {
       switch self{
       case .Test: return #selector(MyEvent.testSuccess(str:))
+      case .MakeCoffe: return #selector(MyEvent.makeCoffee)
       }
     }
   }
@@ -202,7 +226,7 @@ class ViewController: UIViewController {
   // Register / Unregister
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    MyBus.register(self, event: .Test)
+    MyBus.register(self, events: .Test, .MakeCoffe)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -224,6 +248,11 @@ class ViewController: UIViewController {
 
 //Implement method that you want to use
 extension ViewController: MyEvent {
+  
+  func makeCoffee() {
+    print("☕️")
+  }
+
   
   func testSuccess(str: String) {
     print(str)
