@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
 
   s.name         = "MagicSwiftBus"
-  s.version      = "1.0.1"
+  s.version      = "1.0.3"
   s.summary      = "Use NotificationCenter with EventBus style"
 
   #s.description  = <<-DESC
   #                 DESC
 
-  s.homepage     = "https://github.com/favret/Bus"
+  s.homepage     = "https://github.com/favret/Magic-Swift-Bus"
 
   #s.license      = "MIT (example)"
   s.license      = 'MIT'
