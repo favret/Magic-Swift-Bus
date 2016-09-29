@@ -1,7 +1,7 @@
-# Bus
+# MagicSwiftBus
 Use NotificationCenter with EventBus style
 
-## Synopsis
+## What is MagicSwiftBus ?
 - Implement publish-subscribe communication between object easily.
 - Don't loose time with crash due to missing character, use enum instead.
 - don't use NSNotification as parameters of your methods, define the real param directly.
@@ -9,27 +9,133 @@ Use NotificationCenter with EventBus style
 
 [inspired By](https://medium.com/swift-programming/swift-nsnotificationcenter-protocol-c527e67d93a1#.5zinv4kr6)
 
-## How to use
-1. Download `Bus.Swift`
-2. Implement a Protocol who define event methods.
-3. Create Class that inherit Bus protocol.
+### Before MagicSwiftBus
 
-You can find an exemple in `main.swift`
+#### register / unregister
+
+```
+NSNotificationCenter.defaultCenter().addObserver(
+    self,
+    selector: #selector(testSuccess(_:)),
+    name: "MyNotificationTest",
+    object: nil)
+```
+
+#### post notification
+
+```
+NSNotificationCenter.defaultCenter().postNotificationName("MyNotificationTest", object: "bonjour" as AnyObject)
+```
+
+#### implement notification's method
+
+```
+func testSuccess(notification: Notification) {
+  if let object = notification.object as String {
+  }
+}
+```
+
+### With MagicSwiftBus
+
+#### register / unregister
+
+```
+Bus.register(self, event: .Test, "bonjour")
+```
+
+#### post notification
+
+```
+Bus.post(.Test)
+```
+
+#### implement notification's method
+
+```
+func testSuccess(str: String) {
+  print(str)
+}
+```
 
 ## Installation
-- Download `Bus.Swift`
 
-## Exemple
+### CocoaPods
 
-- Create your protocol
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+To integrate MagicSwiftBus into your Xcode project using CocoaPods, it in your `Podfile`:
+
+```
+platform :ios, '9.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+  pod 'MagicSwiftBus', :git => 'https://github.com/favret/Magic-Swift-Bus.git', :tag => '1.0.1'
+end
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate Magic-Swift-Bus into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "favret/Magic-Swift-Bus" => 1.0.1
+```
+
+Run `carthage update` to build the framework and drag the built `MagicSwiftBus.framework` into your Xcode project.
+
+### Manually
+
+If you prefer not to use either of the aforementioned dependency managers, you can integrate Magic-Swift-Bus into your project manually as an Embedded Framework.
+
+## Usage
+
+### Create your event protocol
+
 ```
 @objc protocol MyEvent {
   func testSuccess(str:String)
 }
 ```
 
-- create a class who inherit `Bus`
-You also have to map your event with the associated method
+Here, you can see that the parameter is a `String` but i can be something else.
+
+### Implement your event protocol
+
+```
+extension MyReceiver: MyEvent {
+
+  func testSuccess(str: String) {
+    print(str)
+  }
+
+}
+```
+
+In this exemple, `MyReceiver` can be `UIViewController` or `NSObject` or wathever you want.
+
+### Add your event protocol to MagicSwiftBus
+
 ```
 class MyBus: Bus {
   enum EventBus: String, EventBusType{
@@ -43,25 +149,84 @@ class MyBus: Bus {
   }
 }
 ```
-- In your receiver, can be ViewController, nsobject or something else, implement all methods that you want to receive
-```
-extension MyReceiver: MyEvent {
+First, you have to create a class that inherit `Bus`.
+Then, implement `EventBusType` protocol. in the above exemple, this protocol is implemented by an enum.
 
-  func testSuccess(str: String) {
-    print(str)
-  }
+### Don't forget to register and unregister
 
-}
 ```
+MyBus.register(self, event: .Test)
+...
+MyBus.unregisterAll(self)
+```
+
+### Fire simple notification
 
 Finally, you can fire an event like that :
 ```
 MyBus.post(.Test, object: "bonjour")
 ```
 
-Don't forget to register and unregister your class :
+## Exemple
+
 ```
-MyBus.register(self, event: .Test)
-...
-MyBus.unregisterAll(self)
+import UIKit
+import MagicSwiftBus
+
+
+//Define your event protocol
+@objc protocol MyEvent {
+  func testSuccess(str:String)
+}
+
+//Map protocol to eventBusType
+class MyBus: Bus {
+  enum EventBus: String, EventBusType {
+    case Test
+    
+    var notification: Selector {
+      switch self{
+      case .Test: return #selector(MyEvent.testSuccess(str:))
+      }
+    }
+  }
+}
+
+class ViewController: UIViewController {
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+  }
+
+  // Register / Unregister
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    MyBus.register(self, event: .Test)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    MyBus.unregisterAll(self)
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  //Fire notification, can be anywhere in my code
+  func post() {
+    MyBus.post(.Test, "bonjour")
+    //MyBus.
+  }
+}
+
+//Implement method that you want to use
+extension ViewController: MyEvent {
+  
+  func testSuccess(str: String) {
+    print(str)
+  }
+}
 ```
