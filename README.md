@@ -75,7 +75,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-  pod 'MagicSwiftBus', :git => 'https://github.com/favret/Magic-Swift-Bus.git', :tag => '1.0.1'
+  pod 'MagicSwiftBus', :git => 'https://github.com/favret/Magic-Swift-Bus.git', :tag => '3.0.0'
 end
 ```
 
@@ -99,7 +99,7 @@ $ brew install carthage
 To integrate Magic-Swift-Bus into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "favret/Magic-Swift-Bus" => 1.0.1
+github "favret/Magic-Swift-Bus" => 3.0.0
 ```
 
 Run `carthage update` to build the framework and drag the built `MagicSwiftBus.framework` into your Xcode project.
