@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MagicSwiftBus"
-  s.version      = "1.0.3"
+  s.version      = "3.0.0"
   s.summary      = "Use NotificationCenter with EventBus style"
 
   #s.description  = <<-DESC

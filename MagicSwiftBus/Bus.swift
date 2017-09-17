@@ -89,7 +89,7 @@ public extension Bus where EventBus.RawValue == String {
             if (arg1 != nil) && (arg2 != nil) {
               obj.perform(selector, with: arg1, with: arg2)
             } else if (arg1 != nil) || (arg2 != nil) {
-              obj.perform(selector, with: (arg1 != nil) ? arg1 : arg2)
+              obj.perform(selector, with: (arg1 != nil ? arg1 : arg2) as Any)
             } else {
               obj.perform(selector)
             }
