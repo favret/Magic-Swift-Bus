@@ -115,21 +115,26 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 ```swift
 @objc protocol MyEvent {
   func testSuccess(str:String)
+  func makeCoffee()
 }
 ```
 
-Here, you can see that the parameter is a `String` but i can be something else.
+Here, you can see that the parameter is a `String` but it can be something else.
 
 ### Implement your event protocol
 
 ```swift
-extension MyReceiver: MyEvent {
+extension ViewController: MyEvent {
+
+  func makeCoffee() {
+    print("☕️")
+  }
 
   func testSuccess(str: String) {
     print(str)
   }
-
 }
+
 ```
 
 In this exemple, `MyReceiver` can be `UIViewController` or `NSObject` or wathever you want.
@@ -138,12 +143,13 @@ In this exemple, `MyReceiver` can be `UIViewController` or `NSObject` or watheve
 
 ```swift
 class MyBus: Bus {
-  enum EventBus: String, EventBusType{
-    case Test
+  enum EventBus: String, EventBusType {
+    case test, makeCoffee
 
     var notification: Selector {
-      switch self {
-      case .Test: return #selector(MyEvent.testSuccess(_:))
+      switch self{
+      case .test: return #selector(MyEvent.testSuccess(str:))
+      case .makeCoffee: return #selector(MyEvent.makeCoffee)
       }
     }
   }
@@ -155,9 +161,9 @@ Then, implement `EventBusType` protocol. in the above exemple, this protocol is 
 ### Don't forget to register and unregister
 
 ```swift
-MyBus.register(self, event: .Test)
+MyBus.register(observer: self, events: .test, .makeCoffee)
 ...
-MyBus.unregisterAll(self)
+MyBus.unregisterAll(observer: self)
 ```
 
 ### Fire simple notification
@@ -165,7 +171,7 @@ MyBus.unregisterAll(self)
 Finally, you can fire an event like that :
 
 ```swift
-MyBus.post(.Test, object: "bonjour")
+    MyBus.post(event: .test, with: "hello world")
 ```
 
 ### Thread
@@ -173,21 +179,19 @@ MyBus.post(.Test, object: "bonjour")
 #### post event on main Thread
 
 ```swift
-MyBus.postOnMainThread(event: .Test)
+MyBus.postOnMainThread(event: .test, with: "hello world")
 ```
 
-#### post event on background Thread
+#### post event on background Thread (default)
 
 ```swift
-MyBus.postOnBackgroundThread(event: .Test)
+MyBus.postOnBackgroundThread(event: .test, with: "hello world")
 ```
 
 #### post event on specific Queue
 
 ```swift
-let queue = DispatchQueue("MyQueue")
-...
-MyBus.postOn(queue: queue, event: .Test)
+MyBus.post(on: DispatchQueue.global(qos: .background), event: .test, with: "hello world")
 ```
 
 ## Exemple
@@ -196,22 +200,19 @@ MyBus.postOn(queue: queue, event: .Test)
 import UIKit
 import MagicSwiftBus
 
-
-//Define your event protocol
 @objc protocol MyEvent {
   func testSuccess(str:String)
   func makeCoffee()
 }
 
-//Map protocol to eventBusType
 class MyBus: Bus {
   enum EventBus: String, EventBusType {
-    case Test, MakeCoffe
-    
+    case test, makeCoffee
+
     var notification: Selector {
       switch self{
-      case .Test: return #selector(MyEvent.testSuccess(str:))
-      case .MakeCoffe: return #selector(MyEvent.makeCoffee)
+      case .test: return #selector(MyEvent.testSuccess(str:))
+      case .makeCoffee: return #selector(MyEvent.makeCoffee)
       }
     }
   }
@@ -224,37 +225,32 @@ class ViewController: UIViewController {
     // Do any additional setup after loading the view, typically from a nib.
   }
 
-  // Register / Unregister
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    MyBus.register(self, events: .Test, .MakeCoffe)
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    MyBus.unregisterAll(self)
-  }
-  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-  //Fire notification, can be anywhere in my code
-  func post() {
-    MyBus.post(.Test, "bonjour")
-    //MyBus.
+
+  // Register / Unregister
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    MyBus.register(observer: self, events: .test, .makeCoffee)
+    MyBus.post(event: .test, with: "helloWorld")
+    MyBus.post(event: .makeCoffee)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    MyBus.unregisterAll(observer: self)
   }
 }
 
 //Implement method that you want to use
 extension ViewController: MyEvent {
-  
+
   func makeCoffee() {
     print("☕️")
   }
 
-  
   func testSuccess(str: String) {
     print(str)
   }

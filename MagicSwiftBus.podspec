@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
   s.source_files  = "**/*.swift"
   # s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
+  #s.public_header_files = "**/*.h"
 
 
   # s.resource  = "icon.png"
