@@ -17,105 +17,102 @@ public protocol Bus {
 }
 
 public extension Bus where EventBus.RawValue == String {
-
+  
   private static func nameFor(_ event: EventBus) -> String {
     return "\(self).\(event.rawValue)"
   }
-
+  
   // MARK: Post
-  func post(_ event: EventBus, _ string: String) {
-    Self.post(event, object: string as AnyObject)
-  }
-
-  func post(_ event: EventBus, object: AnyObject? = nil) {
-    Self.post(event, object: object)
-  }
-
-  func post(_ event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil) {
-    Self.post(event, object: object, userInfo: userInfo)
-  }
-
-  static func post(_ event: EventBus, _ string: String) {
-    Self.post(event, object: string as AnyObject)
-  }
-
-  static func post(_ event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil) {
+  
+  static func post(event: EventBus, object: AnyObject? = nil, with arg1: Any? = nil, with arg2: Any? = nil) {
     let name = nameFor(event)
-
-    NSNotificationCenter.defaultCenter()
-      .postNotificationName(name, object: object, userInfo: userInfo)
+    var userInfo: [AnyHashable: Any] = [:]
+    
+    if let arg1 = arg1 {
+      userInfo["arg1"] = arg1
+    }
+    if let arg2 = arg2 {
+      userInfo["arg2"] = arg2
+    }
+    
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: name), object: object, userInfo: userInfo)
   }
-
-
+  
   // MARK: Post on Thread
-
-  static func postOnMainThread(event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil, async:Bool = true) {
-    Self.postOn(queue: dispatch_get_main_queue(), event: event, object: object, userInfo: userInfo, async: async)
-  }
-
-  static func postOnBackgroundThread(event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil, async:Bool = true) {
-    Self.postOn(queue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), event: event, object: object, userInfo: userInfo, async: async)
-  }
-
-  static func postOn(queue queue:dispatch_queue_t, event: EventBus, object: AnyObject? = nil, userInfo: [String : AnyObject]? = nil, async:Bool = true) {
+  static func post(on queue:DispatchQueue = DispatchQueue.global(qos: .background), event: EventBus, object: AnyObject? = nil, with arg1: Any? = nil, arg2: Any? = nil, async:Bool = true) {
     if async {
-      dispatch_async(queue) {
-       Self.post(event, object: object, userInfo: userInfo)
+      queue.async {
+        Self.post(event: event, object: object, with: arg1, with: arg2)
       }
     }
     else {
-      dispatch_sync(queue) {
-        Self.post(event, object: object, userInfo: userInfo)
+      queue.sync {
+        Self.post(event: event, object: object, with: arg1, with: arg2)
       }
     }
-
+    
   }
-
+  
+  static func postOnMainThread(event: EventBus, object: AnyObject? = nil, with arg1: Any? = nil, arg2: Any? = nil, async:Bool = true) {
+    Self.post(on: DispatchQueue.main, event: event, object: object, with: arg1, arg2: arg2, async: async)
+  }
+  
+  static func postOnBackgroundThread(event: EventBus, object: AnyObject? = nil, with arg1: Any? = nil, arg2: Any? = nil, async:Bool = true) {
+     Self.post(on: DispatchQueue.global(qos: .background), event: event, object: object, with: arg1, arg2: arg2, async: async)
+  }
+  
   // MARK: Register
   static func register(observer: AnyObject, events: EventBus ...,
-    queue: NSOperationQueue = NSOperationQueue.mainQueue()) {
+    queue: OperationQueue = OperationQueue.main) {
     for event in events {
-      register(observer, event: event, queue: queue)
+      register(observer: observer, event: event, queue: queue)
     }
   }
-
+  
   static func register(observer: AnyObject, event: EventBus,
-                       queue: NSOperationQueue = NSOperationQueue.mainQueue()) {
+                       queue: OperationQueue = OperationQueue.main) {
     let name = nameFor(event)
-
-    NSNotificationCenter.defaultCenter()
-      .addObserverForName(
-        name,
+    
+    NotificationCenter.default
+      .addObserver(
+        forName: NSNotification.Name(rawValue: name),
         object: nil,
         queue: queue,
-        usingBlock: { [weak observer](notification) in
+        using: { [weak observer](notification) in
           guard let obj = observer as? NSObject
             else { return }
-
+          
           let selector = event.notification
-
-          if let o = notification.object {
-            obj.performSelector(selector, withObject: o)
+          if let userInfo = notification.userInfo {
+            let arg1 = userInfo["arg1"]
+            let arg2 = userInfo["arg2"]
+            if (arg1 != nil) && (arg2 != nil) {
+              obj.perform(selector, with: arg1, with: arg2)
+            } else if (arg1 != nil) || (arg2 != nil) {
+              obj.perform(selector, with: (arg1 != nil) ? arg1 : arg2)
+            } else {
+              obj.perform(selector)
+            }
           }
-          else { obj.performSelector(selector) }
-        })
+          else { obj.perform(selector) }
+      })
   }
-
+  
   // MARK: Unregister
   static func unregisterAll(observer: AnyObject) {
-    NSNotificationCenter.defaultCenter().removeObserver(observer)
+    NotificationCenter.default.removeObserver(observer)
   }
-
+  
   static func unregister(_ observer: AnyObject, events: EventBus ...) {
     for event in events {
       unregister(observer, event: event)
     }
   }
-
-  static func unregister(observer: AnyObject, event: EventBus, object: AnyObject? = nil) {
+  
+  static func unregister(_ observer: AnyObject, event: EventBus, object: AnyObject? = nil) {
     let name = nameFor(event)
-
-    NSNotificationCenter.defaultCenter()
-      .removeObserver(observer, name: name, object: object)
+    
+    NotificationCenter.default
+      .removeObserver(observer, name: NSNotification.Name(rawValue: name), object: object)
   }
 }
