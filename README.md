@@ -41,7 +41,7 @@ func testSuccess(notification: Notification) {
 #### register / unregister
 
 ```swift
-Bus.register(self, event: .Test, "bonjour")
+Bus.register(self, event: .Test, with: "bonjour")
 ```
 
 #### post notification
@@ -75,7 +75,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-  pod 'MagicSwiftBus', :git => 'https://github.com/favret/Magic-Swift-Bus.git', :tag => '3.0.0'
+  pod 'MagicSwiftBus'
 end
 ```
 
