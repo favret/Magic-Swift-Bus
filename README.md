@@ -1,3 +1,5 @@
+[![codebeat badge](https://codebeat.co/badges/b413ed75-c114-4137-9e60-8c92bbe1667a)](https://codebeat.co/projects/github-com-favret-magic-swift-bus-master)
+
 # MagicSwiftBus
 Use NotificationCenter with EventBus style
 
