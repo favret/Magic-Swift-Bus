@@ -16,6 +16,8 @@ public protocol Bus {
   associatedtype EventBus: EventBusType
 }
 
+fileprivate var observers: [(NSObjectProtocol, NSObject)]  = []
+
 public extension Bus where EventBus.RawValue == String {
   
   private static func nameFor(_ event: EventBus) -> String {
@@ -71,15 +73,16 @@ public extension Bus where EventBus.RawValue == String {
   
   static func register(observer: AnyObject, event: EventBus,
                        queue: OperationQueue = OperationQueue.main) {
+    guard let observer = observer as? NSObject
+      else { return }
     let name = nameFor(event)
-    
-    NotificationCenter.default
+    let observerProtol = NotificationCenter.default
       .addObserver(
         forName: NSNotification.Name(rawValue: name),
         object: nil,
         queue: queue,
         using: { [weak observer](notification) in
-          guard let obj = observer as? NSObject
+          guard let obj = observer
             else { return }
           
           let selector = event.notification
@@ -96,11 +99,30 @@ public extension Bus where EventBus.RawValue == String {
           }
           else { obj.perform(selector) }
       })
+    
+    observers.append((observerProtol, observer))
   }
   
   // MARK: Unregister
   static func unregisterAll(observer: AnyObject) {
-    NotificationCenter.default.removeObserver(observer)
+    guard let observer = observer as? NSObject
+      else { return }
+    
+    let toUnregister = observers.filter { (arg) -> Bool in
+      return observer == arg.1
+    }
+    
+    let toKeep = observers.filter { (arg) -> Bool in
+      return observer != arg.1
+    }
+    
+    toUnregister.forEach { arg in
+      let (observer, _) = arg
+      NotificationCenter.default.removeObserver(observer)
+    }
+    
+    observers.removeAll()
+    observers.append(contentsOf: toKeep)
   }
   
   static func unregister(_ observer: AnyObject, events: EventBus ...) {
